@@ -1,11 +1,32 @@
- export const Validate =(data) =>{
+ export const Validate =(data,type) =>{
    const errors ={}
+
+
+   if(type == "singup"){
+
 
     if(!data.name.trim()){
         errors.name="Name is required"
     }else{
         delete errors.name;
     }
+
+    if(!data.confrimePassword){
+        errors.confrimePassword="Repeating the password is required"
+    }else if(data.confrimePassword !== data.password){
+        errors.confrimePassword="The password does not match the duplicate password"
+    }else{
+        delete errors.confrimePassword
+    }
+
+    if(data.isCheck){
+        delete errors.isCheck;
+    }else{
+        errors.isCheck="isCheck is required"
+    }
+   }
+
+   
 
     if(!data.email){
         errors.email ="Email is required"
@@ -23,19 +44,7 @@
         delete errors.password
     }
 
-    if(!data.confrimePassword){
-        errors.confrimePassword="Repeating the password is required"
-    }else if(data.confrimePassword !== data.password){
-        errors.confrimePassword="The password does not match the duplicate password"
-    }else{
-        delete errors.confrimePassword
-    }
-
-    if(data.isCheck){
-        delete errors.isCheck;
-    }else{
-        errors.isCheck="isCheck is required"
-    }
+   
 
     return errors;
 }

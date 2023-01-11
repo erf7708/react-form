@@ -4,6 +4,7 @@ import Styles from "../Components/Singup.module.css";
 // import { ToastContainer} from 'react-toastify';
 // import 'react-toastify/dist/ReactToastify.css';
 // import notify from '../tostify/notify';
+import { Link } from 'react-router-dom';
  
 function Singup(props) {
 
@@ -19,7 +20,7 @@ function Singup(props) {
     const [error,setError] =useState({});
     const[touched,setTouched] =useState({})
     useEffect(()=>{
-        setError(Validate(data))
+        setError(Validate(data,"singup"))
         
     },[data,touched])
 
@@ -117,7 +118,7 @@ function Singup(props) {
                 </div>
                 <div className={Styles.formButtons}>
             
-                    <a href='#'>Login</a>
+                    <Link to="/login">Login</Link>
                     <button type="submit">SingUp</button>
                 </div>
             </form>
