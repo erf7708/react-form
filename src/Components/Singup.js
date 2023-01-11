@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Validate } from '../Validation/Validate';
-
+import Styles from "../Components/Singup.module.css";
 // import { ToastContainer} from 'react-toastify';
 // import 'react-toastify/dist/ReactToastify.css';
 // import notify from '../tostify/notify';
@@ -20,8 +20,8 @@ function Singup(props) {
     const[touched,setTouched] =useState({})
     useEffect(()=>{
         setError(Validate(data))
-        console.log(error)
-    },[data])
+        
+    },[data,touched])
 
     const ChangeHandler = event =>{
         if(event.target.name === "isCheck"){
@@ -42,6 +42,8 @@ function Singup(props) {
         if(!Object.keys(error).length){
         //    notify("Success submit data","success")
             console.log(data)
+           
+            
         }else{
 
             // notify("Error submit data","error")
@@ -57,35 +59,63 @@ function Singup(props) {
     }
 
     return (
-        <div style={{textAlign:"center"}} >
-            <form onSubmit={submitHandler} >
-                <h2>SingUp</h2>
-                <div>
+        <div className={Styles.container}  >
+            <form onSubmit={submitHandler} className={Styles.formContainer} >
+                <h2 className={Styles.header}>SingUp</h2>
+                <div className={Styles.formField}>
                     <lable>Name</lable>
-                    <input type="text" name="name" value={data.name}     onChange={ChangeHandler} onFocus={isTouched} />
+                    <input 
+                    className={(error.name && touched.name) ? Styles.uncompleted : Styles.formInput}
+                    type="text" 
+                    name="name" 
+                    value={data.name}   
+                      onChange={ChangeHandler}
+                       onFocus={isTouched} />
                     {error.name && touched.name &&<span>{error.name}</span>}
                 </div>
-                <div>
+                <div  className={Styles.formField}>
                     <lable>Email</lable>
-                    <input type="email" name="email" value={data.email}   onChange={ChangeHandler}onFocus={isTouched}  />
+                    <input
+                     className={(error.email && touched.email) ? Styles.uncompleted : Styles.formInput}
+                     type="email"
+                      name="email"
+                       value={data.email}
+                          onChange={ChangeHandler}
+                          onFocus={isTouched}  />
                     {error.email && touched.email && <span>{error.email}</span>}
                 </div>
-                <div>
+                <div  className={Styles.formField}>
                     <lable>Password</lable>
-                    <input type="password" name="password" value={data.password}   onChange={ChangeHandler}  onFocus={isTouched}/>
+                    <input 
+                    className={(error.password && touched.password) ? Styles.uncompleted : Styles.formInput}
+                    type="password"
+                     name="password" 
+                     value={data.password} 
+                       onChange={ChangeHandler}
+                         onFocus={isTouched}/>
                     {error.password && touched.password && <span>{error.password}</span>}
                 </div>
-                <div>
+                <div  className={Styles.formField}>
                     <lable>ConfrimePassword</lable>
-                    <input type="password" name="confrimePassword" value={data.confrimePassword}   onChange={ChangeHandler} onFocus={isTouched}  />
+                    <input 
+                    className={(error.confrimePassword && touched.confrimePassword) ? Styles.uncompleted : Styles.formInput}
+                    type="password"
+                     name="confrimePassword" 
+                     value={data.confrimePassword} 
+                       onChange={ChangeHandler} 
+                       onFocus={isTouched}  />
                     {error.confrimePassword && touched.confrimePassword  && <span>{error.confrimePassword}</span>}
                 </div>
-                <div>
+                <div  className={Styles.formField}>
+                    <div className={Styles.checkBoxContainer}>
+
                     <lable>I agree with your site rules</lable>
                     <input type="checkbox" name="isCheck" value={data.isCheck}   onChange={ChangeHandler} onFocus={isTouched} />
+                    
+                    </div>
                     {error.isCheck  && touched.isCheck  &&  <span>{error.isCheck}</span>}
                 </div>
-                <div>
+                <div className={Styles.formButtons}>
             
                     <a href='#'>Login</a>
                     <button type="submit">SingUp</button>
